@@ -9,6 +9,10 @@ class HelloView(TemplateView):
             'title':'Hello',
             'message':'your data:',
             'form':HelloForm(),
+            'result':None,
+            'checks':None,
+            'choice':None,
+            'radio':None,
         }
     
     def get(self, request):
@@ -17,6 +21,16 @@ class HelloView(TemplateView):
     def post(self, request):
         msg = 'あなたは、<b>' + request.POST['name'] + '(' + request.POST['age'] + ')<b>さんです。<br>メールアドレスは<b>' + request.POST['mail'] + '<b>ですね。'
         self.params['message'] = msg
+        if 'check' in request.POST:
+            self.params['result'] = 'Checked!'
+        else:
+            self.params['result'] = 'not checked...'
+        chk = request.POST['checks']
+        self.params['checks'] = 'you selected: ' + chk
+        ch = request.POST['choice']
+        self.params['choice'] = 'selected: ' + ch
+        rad = request.POST['choices']
+        self.params['radio'] = 'selected: ' + rad
         self.params['form'] = HelloForm(request.POST)
         return render(request, 'hello/index.html', self.params)
 

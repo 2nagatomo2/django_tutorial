@@ -12,6 +12,10 @@
 <body>
     <h1>{{title}}</h1>
     <p>{{message|safe}}</p>
+    <p>{{result|safe}}</p>
+    <p>{{checks|safe}}</p>
+    <p>{{choice|safe}}</p>
+    <p>{{radio|safe}}</p>
     <table>
         <form action="{% url 'index' %}" method="post">
             {% csrf_token %}
