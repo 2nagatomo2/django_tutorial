@@ -1,4 +1,5 @@
 from django import forms
+from .models import Friend
 
 class HelloForm(forms.Form):
     name = forms.CharField(label='name')
@@ -26,3 +27,14 @@ class HelloForm(forms.Form):
     ]
     #ラジオボタン
     choices = forms.ChoiceField(label='radio', choices=data_radio, widget=forms.RadioSelect())
+
+class FriendForm(forms.Form):
+    id = forms.IntegerField(label='ID')
+
+class CreateForm(forms.ModelForm):
+    class Meta:
+        model = Friend
+        fields = ['name', 'mail', 'gender', 'age', 'birthday']
+
+class FindForm(forms.Form):
+    find = forms.CharField(label='Find', required=False)
